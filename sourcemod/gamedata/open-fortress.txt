@@ -6,27 +6,27 @@
 		{
 			"ForceRespawn"
 			{
-				"windows"	"325"
-				"linux"		"326"
-				"mac"		"326"
+				"windows"	"327"
+				"linux"		"328"
+				"mac"		"328"
 			}
 			"CanGoToStalemate"
 			{
 				"windows"	"221"
-				"linux" 	"222"
-				"mac" 		"222"
+				"linux" 	"223"
+				"mac" 		"223"
 			}
 			"PrimaryAttack"
 			{
-				"windows"	"110"
-				"linux" 	"111"
-				"mac" 		"111"
+				"windows"	"275"
+				"linux" 	"276"
+				"mac" 		"276"
 			}
 			"CalcIsAttackCriticalHelper"
 			{
-				"windows" 	"386"
-				"linux" 	"387"
-				"mac" 		"387"
+				"windows" 	"390"
+				"linux" 	"391"
+				"mac" 		"391"
 			}
 			"CalcIsAttackCriticalHelperNoCrits"
 			{
@@ -36,9 +36,9 @@
 			}
 			"Spawn"
 			{
-				"windows" 	"22"
-				"linux"		"23"
-				"mac"		"23"
+				"windows" 	"23"
+				"linux"		"24"
+				"mac"		"24"
 			}
 		}
 		"Signatures"
