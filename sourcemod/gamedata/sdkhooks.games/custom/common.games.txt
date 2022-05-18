@@ -6,9 +6,9 @@
 		{
 			"CanBeAutobalanced"
 			{
-				"linux"		"460"
-				"mac"		"459"
-				"windows" 	"459"
+				"linux"		"487"
+				"mac"		"486"
+				"windows" 	"486"
 			}
 			"EndTouch"
 			{
@@ -30,9 +30,9 @@
 			}
 			"GroundEntChanged"
 			{
-				"linux"		"180"
-				"mac"		"180"
-				"windows" 	"180"
+				"linux"		"181"
+				"mac"		"179"
+				"windows" 	"179"
 			}
 			"OnTakeDamage"
 			{
@@ -42,21 +42,21 @@
 			}
 			"OnTakeDamage_Alive"
 			{
-				"linux"		"275"
-				"mac"		"274"
-				"windows" 	"274"
+				"linux"		"290"
+				"mac"		"289"
+				"windows" 	"289"
 			}
 			"PreThink"
 			{
-				"linux"		"335"
-				"mac"		"335"
-				"windows" 	"335"
+				"linux"		"362"
+				"mac"		"361"
+				"windows" 	"361"
 			}
 			"PostThink"
 			{
-				"linux"		"336"
-				"mac"		"335"
-				"windows" 	"335"
+				"linux"		"363"
+				"mac"		"362"
+				"windows" 	"362"
 			}
 			"Reload"
 			{
@@ -73,8 +73,8 @@
 			"ShouldCollide"
 			{
 				"linux"		"18"
-				"mac"		"17"
-				"windows" 	"17"
+				"mac"		"16"
+				"windows" 	"16"
 			}
 			"Spawn"
 			{
@@ -115,44 +115,44 @@
 			"VPhysicsUpdate"
 			{
 				"linux"		"160"
-				"mac"		"161"
+				"mac"		"159"
 				"windows" 	"159"
 			}
 			"Blocked"
 			{
-				"linux"		"105"
-				"mac"		"104"
-				"windows" 	"104"
+				"linux"		"106"
+				"mac"		"105"
+				"windows" 	"105"
 			}
 			"Weapon_CanSwitchTo"
 			{
-				"linux"		"269"
-				"mac"		"268"
-				"windows" 	"268"
+				"linux"		"284"
+				"mac"		"283"
+				"windows" 	"283"
 			}
 			"Weapon_CanUse"
 			{
-				"linux"		"263"
-				"mac"		"262"
-				"windows" 	"262"
+				"linux"		"278"
+				"mac"		"277"
+				"windows" 	"277"
 			}
 			"Weapon_Drop"
 			{
-				"linux"		"266"
-				"mac"		"265"
-				"windows" 	"265"
+				"linux"		"281"
+				"mac"		"280"
+				"windows" 	"280"
 			}
 			"Weapon_Equip"
 			{
-				"linux"		"264"
-				"mac"		"263"
-				"windows" 	"263"
+				"linux"		"279"
+				"mac"		"278"
+				"windows" 	"278"
 			}
 			"Weapon_Switch"
 			{
-				"linux"		"267"
-				"mac"		"266"
-				"windows" 	"266"
+				"linux"		"282"
+				"mac"		"281"
+				"windows" 	"281"
 			}
 		}
 	}

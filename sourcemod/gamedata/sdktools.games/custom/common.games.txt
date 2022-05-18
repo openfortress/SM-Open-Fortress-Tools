@@ -25,21 +25,21 @@
 			
 			"GiveNamedItem"
 			{
-				"windows"	"402"
-				"linux"		"403"
-				"mac"		"402"
+				"windows"	"429"
+				"linux"		"430"
+				"mac"		"429"
 			}
 			"RemovePlayerItem"
 			{
-				"windows"	"272"
-				"linux"		"273"
-				"mac"		"272"
+				"windows"	"287"
+				"linux"		"288"
+				"mac"		"287"
 			}
 			"Weapon_GetSlot"
 			{
-				"windows"	"270"
-				"linux"		"271"
-				"mac"		"270"
+				"windows"	"285"
+				"linux"		"286"
+				"mac"		"285"
 			}
 			"Ignite"
 			{
@@ -61,9 +61,9 @@
 			}
 			"CommitSuicide"
 			{
-				"windows"	"442"
-				"linux"		"442"
-				"mac"		"442"
+				"windows"	"469"
+				"linux"		"469"
+				"mac"		"469"
 			}
 			"GetVelocity"
 			{
@@ -73,8 +73,8 @@
 			}
 			"EyeAngles"
 			{
-				"windows"	"134"
-				"linux"		"135"
+				"windows"	"133"
+				"linux"		"134"
 				"mac"		"133"
 			}
 			"SetEntityModel"
@@ -103,15 +103,15 @@
 			}
 			"PlayerRunCmd"
 			{
-				"windows"	"421"
-				"linux"		"422"
-				"mac"		"421"
+				"windows"	"448"
+				"linux"		"449"
+				"mac"		"448"
 			}
 			"GiveAmmo"
 			{
-				"windows"	"254"
-				"linux"		"255"
-				"mac"		"254"
+				"windows"	"269"
+				"linux"		"270"
+				"mac"		"269"
 			}
 			
 			// CBaseClient::SetUserCVar(char  const*,char  const*);
