@@ -1,0 +1,47 @@
+"Games"
+{
+	/* CGlobalEntityList */
+	"#default"
+	{
+		"Offsets"
+		{
+			/* Offset into LevelShutdown */
+			"gEntList"
+			{
+				"linux" 	"99"
+				"mac" 		"99"
+				"windows" 	"87"
+			}
+			"EntInfo"
+			{
+				"linux"		"4"
+				"mac"		"4"
+			}
+			"GetDataDescMap"
+			{
+				"windows"		"11"
+				"linux"			"12"
+				"linux64"		"12"
+				"mac"			"12"
+				"mac64"			"12"
+			}
+		}
+		"Signatures"
+		{
+			"LevelShutdown"
+			{
+				"library"	"server"
+				"windows"	"\x56\xE8\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A\xC7\x00\x00\x00\x00\x00"
+				"linux"		"\x55\x89\xE5\x56\x53\x83\xEC\x10\xE8\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A"
+				"mac"		"\x55\x89\xE5\x56\x53\x83\xEC\x10\xE8\x2A\x2A\x2A\x2A\xA1\x2A\x2A\x2A\x2A"
+			}
+		}
+		"Keys"
+		{
+			"UseInvalidUniverseInSteam2IDs"		"1"
+			"HudRadioMenuMsg"        "ShowMenu"
+            "RadioMenuTimeout"        "4"
+            "HudTextMsg"            "HudMsg"
+		}
+	}
+}

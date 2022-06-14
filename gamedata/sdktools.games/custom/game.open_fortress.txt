@@ -1,0 +1,167 @@
+"Games"
+{
+	"#default"
+	{
+		"Offsets"
+		{
+			"GetTEName"
+			{
+				"windows"	"4"
+				"linux"		"4"
+				"mac"		"4"
+			}
+			"GetTENext"
+			{
+				"windows"	"8"
+				"linux"		"8"
+				"mac"		"8"
+			}
+			"TE_GetServerClass"
+			{
+				"windows"	"0"
+				"linux"		"0"
+				"mac"		"0"
+			}
+			
+			"GiveNamedItem"
+			{
+				"windows"	"429"
+				"linux"		"430"
+				"mac"		"429"
+			}
+			"RemovePlayerItem"
+			{
+				"windows"	"287"
+				"linux"		"288"
+				"mac"		"287"
+			}
+			"Weapon_GetSlot"
+			{
+				"windows"	"285"
+				"linux"		"286"
+				"mac"		"285"
+			}
+			"Ignite"
+			{
+				"windows"	"211"
+				"linux"		"212"
+				"mac"		"212"
+			}
+			"Extinguish"
+			{
+				"windows"	"215"
+				"linux"		"216"
+				"mac"		"215"
+			}
+			"Teleport"
+			{
+				"windows"	"110"
+				"linux"		"111"
+				"mac"		"110"
+			}
+			"CommitSuicide"
+			{
+				"windows"	"469"
+				"linux"		"469"
+				"mac"		"469"
+			}
+			"GetVelocity"
+			{
+				"windows"	"142"
+				"linux"		"143"
+				"mac"		"142"
+			}
+			"EyeAngles"
+			{
+				"windows"	"133"
+				"linux"		"134"
+				"mac"		"133"
+			}
+			"SetEntityModel"
+			{
+				"windows"	"25"
+				"linux"		"26"
+				"mac"		"25"
+			}
+			"AcceptInput"
+			{
+				"windows"	"37"
+				"linux"		"38"
+				"mac"		"37"
+			}
+			"WeaponEquip"
+			{
+				"windows"	"263"
+				"linux"		"264"
+				"mac"		"264"
+			}
+			"Activate"
+			{
+				"windows"	"34"
+				"linux"		"35"
+				"mac"		"34"
+			}
+			"PlayerRunCmd"
+			{
+				"windows"	"448"
+				"linux"		"449"
+				"mac"		"448"
+			}
+			"GiveAmmo"
+			{
+				"windows"	"269"
+				"linux"		"270"
+				"mac"		"269"
+			}
+			
+			// CBaseClient::SetUserCVar(char  const*,char  const*);
+			// Linux offset straight from VTable dump.
+			// Windows offset is crazy. Found the windows SetName function using string "(%d)%-0.*s"
+			// Cross referenced back to the vtable and counted manually (SetUserCvar is 1 higher, offsets start from 1)
+			"SetUserCvar"
+			{
+				"windows"	"18"
+				"linux"		"58"
+				"mac"		"58"
+			}
+			
+			// CBaseClient::SetName(char  const*);
+			// Linux offset straight from VTable dump.
+			// Has string "(%d)%-0.*s"
+			
+			"SetClientName"
+			{
+				"windows"	"17"
+				"linux"		"57"
+				"mac"		"57"
+			}
+			
+			// Offset into CBaseClient - Used by CBaseServer::UpdateUserSettings to determine when changes have been made.
+			// Find CBaseClient::UpdateUserSettings (strings "net_maxroutable", "cl_updaterate" etc) and the offset is set to 0 near the end.
+			// Linux: 	mov     byte ptr [esi+98h], 0
+			// Win:	mov     byte ptr [esi+0A4h], 0
+			//
+			"InfoChanged"
+			{
+				"windows"	"140"
+				"linux"		"141"
+				"mac"		"140"
+			}
+		}
+		"Keys"
+		{
+			"GameRulesProxy"	"CTFGameRulesProxy"
+			"GameRulesDataTable" "tf_gamerules_data"
+		}
+		"Signatures"
+		{
+			"FireOutput"
+			{
+				"library"	"server"
+				"windows"	"\x55\x8B\xEC\x81\xEC\x3C\x01\x00\x00\xA1\x2A\x2A\x2A\x2A\x33\xC5\x89\x45\xFC\x53\x8B\x5D\x20"
+				"linux"		"@_ZN12COutputEvent10FireOutputEP11CBaseEntityS1_f"
+				"mac"		"\x55\x89\xE5\x57\x56\x53\x81\xEC\x9C\x01\x00\x00\x65\x8B\x35\x14\x00\x00\x00"
+			}
+		}
+	}
+}

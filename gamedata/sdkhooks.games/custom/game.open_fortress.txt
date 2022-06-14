@@ -1,0 +1,159 @@
+"Games"
+{
+	"#default"
+	{
+		"Offsets"
+		{
+			"CanBeAutobalanced"
+			{
+				"linux"		"487"
+				"mac"		"487"
+				"windows" 	"486"
+			}
+			"EndTouch"
+			{
+				"linux"		"103"
+				"mac"		"103"
+				"windows" 	"102"
+			}
+			"FireBullets"
+			{
+				"linux"		"115"
+				"mac"		"115"
+				"windows" 	"114"
+			}
+			"GetMaxHealth"
+			{
+				"linux"		"120"
+				"mac"		"120"	
+				"windows" 	"119"
+			}
+			"GroundEntChanged"
+			{
+				"linux"		"180"
+				"mac"		"180"
+				"windows" 	"180"
+			}
+			"OnTakeDamage"
+			{
+				"linux"		"64"
+				"mac"		"64"
+				"windows" 	"63"
+			}
+			"OnTakeDamage_Alive"
+			{
+				"linux"		"290"
+				"mac"		"290"
+				"windows" 	"289"
+			}
+			"PreThink"
+			{
+				"linux"		"362"
+				"mac"		"362"
+				"windows" 	"361"
+			}
+			"PostThink"
+			{
+				"linux"		"363"
+				"mac"		"363"
+				"windows" 	"362"
+			}
+			"Reload"
+			{
+				"linux"		"275"
+				"mac"		"274"
+				"windows" 	"274"
+			}
+			"SetTransmit"
+			{
+				"linux"		"22"
+				"mac"		"21"
+				"windows" 	"21"
+			}
+			"ShouldCollide"
+			{
+				"linux"		"18"
+				"mac"		"16"
+				"windows" 	"16"
+			}
+			"Spawn"
+			{
+				"linux"		"24"
+				"mac"		"23"
+				"windows" 	"23"
+			}
+			"StartTouch"
+			{
+				"linux"		"101"
+				"mac"		"100"
+				"windows" 	"100"
+			}
+			"Think"
+			{
+				"linux"		"49"
+				"mac"		"48"
+				"windows" 	"48"
+			}
+			"Touch"
+			{
+				"linux"		"102"
+				"mac"		"101"
+				"windows" 	"101"
+			}
+			"TraceAttack"
+			{
+				"linux"		"62"
+				"mac"		"61"
+				"windows" 	"61"
+			}
+			"Use"
+			{
+				"linux"		"100"
+				"mac"		"99"
+				"windows" 	"99"
+			}
+			"VPhysicsUpdate"
+			{
+				"linux"		"160"
+				"mac"		"159"
+				"windows" 	"159"
+			}
+			"Blocked"
+			{
+				"linux"		"106"
+				"mac"		"105"
+				"windows" 	"105"
+			}
+			"Weapon_CanSwitchTo"
+			{
+				"linux"		"284"
+				"mac"		"283"
+				"windows" 	"283"
+			}
+			"Weapon_CanUse"
+			{
+				"linux"		"278"
+				"mac"		"277"
+				"windows" 	"277"
+			}
+			"Weapon_Drop"
+			{
+				"linux"		"281"
+				"mac"		"280"
+				"windows" 	"280"
+			}
+			"Weapon_Equip"
+			{
+				"linux"		"279"
+				"mac"		"278"
+				"windows" 	"278"
+			}
+			"Weapon_Switch"
+			{
+				"linux"		"282"
+				"mac"		"281"
+				"windows" 	"281"
+			}
+		}
+	}
+}
