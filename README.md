@@ -10,5 +10,11 @@ These repo includes the corrected tf2 bins for linux to allow it to work. Here's
 # THIS IS GOING TO BREAK. A LOT #
 Open Fortress gets updated every 20 seconds so gamedata will break like there's no tomorrow. If/when they do break, you'll have to either live without, wait for me to actually update new gamedata, or get the signatures/offsets yourself.
 
+# IF YOU USE ACCELERATOR, MAKE SURE TO CHANGE THE MINIDUMP SYMBOL UPLOAD TO "1". BREAKS AND CAUSES AN ENDLESS LOOP OTHERWISE!!!!
+
+```
+	"MinidumpSymbolUpload"	"1"
+```
+
 
 https://github.com/peace-maker/DHooks2 is required. Download the latest build and put it in your addons folder.
