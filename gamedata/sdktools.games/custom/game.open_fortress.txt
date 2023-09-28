@@ -91,9 +91,9 @@
 			}
 			"WeaponEquip"
 			{
-				"windows"	"263"
-				"linux"		"264"
-				"mac"		"264"
+				"windows"	"278"
+				"linux"		"279"
+				"mac"		"279"
 			}
 			"Activate"
 			{
