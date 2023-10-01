@@ -148,7 +148,10 @@
 				"mac"		"269"
 			}
 
-			/* CBaseClient::SetUserCVar(char const*, char const*) (engine.so) */
+			// CBaseClient::SetUserCVar(char  const*,char  const*);
+			// Linux offset straight from VTable dump.
+			// Windows offset is crazy. Found the windows SetName function using string "(%d)%-0.*s"
+			// Cross referenced back to the vtable and counted manually (SetUserCvar is 1 higher, offsets start from 1)
 			"SetUserCvar"
 			{
 				"windows"	"18"
@@ -156,7 +159,9 @@
 				"mac"		"58"
 			}
 
-			/* CBaseClient::SetName(char const*) (engine.so) */
+			// CBaseClient::SetName(char  const*);
+			// Linux offset straight from VTable dump.
+			// Has string "(%d)%-0.*s"
 			"SetClientName"
 			{
 				"windows"	"17"
