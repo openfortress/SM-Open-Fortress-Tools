@@ -36,12 +36,13 @@
 				"windows" 	"119"
 			}
 
-			/* CBaseEntity::NetworkStateChanged_m_hGroundEntity() */
+			// NOTE: https://asherkin.github.io/vtable/ provides the correct windows offset, GDC does not appear to.
+			/* CBaseEntity::NetworkStateChanged_m_hGroundEntity(void*) */
 			"GroundEntChanged"
 			{
-				"linux"		"180"
-				"mac"		"180"
-				"windows" 	"180"
+				"linux"		"181"
+				"mac"		"181"
+				"windows" 	"179"
 			}
 
 			/* CBaseEntity::OnTakeDamage(CTakeDamageInfo const&) */
