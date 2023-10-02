@@ -441,9 +441,15 @@ public MRESReturn CalcIsAttackCritical(int ent, Handle hReturn)
 
 public MRESReturn CTFPlayer_Spawn(int pThis)
 {
-	Call_StartForward(hOnSpawn);
-	Call_PushCell(pThis);
-	Call_Finish();
+	int state = GetEntProp(pThis, Prop_Send, "m_nPlayerState");
+
+	// Only call the forward if the player's state is active.
+	if (state == TF_STATE_ACTIVE)
+	{
+		Call_StartForward(hOnSpawn);
+		Call_PushCell(pThis);
+		Call_Finish();
+	}
 }
 
 public APLRes AskPluginLoad2(Handle self, bool late, char[] error, int max)

@@ -495,28 +495,6 @@ enum TFResourceType
 	TFResource_COUNT
 };
 
-static const char TFResourceNames[TFResource_COUNT][] =
-{
-	"m_iPing",
-	"m_iScore",
-	"m_iDeaths",
-	"m_iTotalScore",
-	"m_iCaptures",
-	"m_iDefenses",
-	"m_iDominations",
-	"m_iRevenge",
-	"m_iBuildingsDestroyed",
-	"m_iHeadshots",
-	"m_iBackstabs",
-	"m_iHealPoints",
-	"m_iInvulns",
-	"m_iTeleports",
-	"m_iResupplyPoints",
-	"m_iKillAssists",
-	"m_iMaxHealth",
-	"m_iPlayerClass"
-};
-
 /**
  * Gets a client's current team.
  *
@@ -920,4 +898,14 @@ enum
 	OF_MUST_BE_BUILT_ON_ATTACHMENT			= 0x02,
 
 	OF_BIT_COUNT	= 2
+};
+
+// Player States
+enum
+{
+	TF_STATE_ACTIVE = 0,		// Happily running around in the game.
+	TF_STATE_WELCOME,			// First entering the server (shows level intro screen).
+	TF_STATE_OBSERVER,			// Game observer mode.
+	TF_STATE_DYING,				// Player is dying.
+	TF_STATE_COUNT
 };
