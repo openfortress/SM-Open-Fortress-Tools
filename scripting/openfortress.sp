@@ -6,7 +6,7 @@
 #pragma semicolon 1
 #include <openfortress>
 
-#define PLUGIN_VERSION 		"1.0.0"
+#define PLUGIN_VERSION 		"1.1.0"
 
 public Plugin myinfo =  {
 	name = "Open Fortress Tools",
