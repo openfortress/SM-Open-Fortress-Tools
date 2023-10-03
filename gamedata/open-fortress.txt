@@ -55,114 +55,101 @@
 
 		"Signatures"
 		{
+			// Signature for ?Burn@CTFPlayerShared@@QAEXPAVCTFPlayer@@M@Z:
+			// 55 8B EC 83 EC 0C 8B 45 08 53 8B D9 89 45 F8 
+			// \x55\x8B\xEC\x83\xEC\x0C\x8B\x45\x08\x53\x8B\xD9\x89\x45\xF8
 			"Burn"
 			{
 				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x56\x8B\xF1\x8B\x8E\x2A\x2A\x00\x00\x8B\x01\x8B\x80\x2A\x2A\x00\x00"
+				"windows"	"@?Burn@CTFPlayerShared@@QAEXPAVCTFPlayer@@M@Z"
 				"linux"		"@_ZN15CTFPlayerShared12OnAddBurningEv"
-				"mac"		"@_ZN15CTFPlayerShared12OnAddBurningEv"
 			}
 			"RemoveDisguise"
 			{
 				"library"	"server"
-				"windows"	"\x56\x8D\xB1\x2A\x2A\x00\x00\x6A\x03\x8B\xCE"
+				"windows"	"@?RemoveDisguise@CTFPlayerShared@@QAEXXZ"
 				"linux"		"@_ZN15CTFPlayerShared17OnRemoveDisguisedEv"
-				"mac"		"@_ZN15CTFPlayerShared17OnRemoveDisguisedEv"
 			}
 			"Disguise"
 			{
 				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x53\x56\x8B\xF1\x8B\x8E\x2A\x2A\x00\x00\xE8"
+				"windows"	"@?Disguise@CTFPlayerShared@@QAEXHH@Z"
 				"linux"		"@_ZN15CTFPlayerShared14OnAddDisguisedEv"
-				"mac"		"@_ZN15CTFPlayerShared14OnAddDisguisedEv"
 			}
 			"Regenerate"
 			{
 				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x83\xEC\x10\x53\x56\x57\x8B\xF9\x8B\x87\x2A\x2A\x00\x00\x8D\x9F\x2A\x2A\x00\x00"
+				"windows"	"@?Regenerate@CTFPlayer@@QAEXXZ"
 				"linux"		"@_ZN9CTFPlayer10RegenerateEv"
-				"mac"		"@_ZN9CTFPlayer10RegenerateEv"
 			}
 			"AddCondition"
 			{
 				"library"	"server"
-				"windows" 	"\x55\x8B\xEC\x53\x56\x8B\x75\x08\x8B\xD9\x89\x75\x08\x57\x81\xFE\x80\x00\x00\x00\x7D\x2A\x83\xFE\x60\x7D\x2A\x83\xFE\x40\x7D\x2A\x83\xFE\x20\x7D\x2A\x8D\x7B\x18\x8B\x47\xE8\x8D\x4F\xE8\x57\xFF\x10\xEB\x2A\x8D\x7B\x1C\x8B\x47\xE4\x8D\x4F\xE4\x57\xFF\x10\x8D\x46\xE0\xEB\x2A\x8D\x7B\x20\x8B\x47\xE0\x8D\x4F\xE0\x57\xFF\x10\x8D\x46\xC0\xEB\x2A\x8D\x7B\x24\x8B\x47\xDC\x8D\x4F\xDC\x57\xFF\x10\x8D\x46\xA0\xEB\x2A\x8D\x7B\x28\x8B\x47\xD8\x8D\x4F\xD8\x57\xFF\x10\x8D\x46\x80\x89\x45\x08\x8B\x4D\x08\xB8\x01\x00\x00\x00\xD3\xE0\x8D\x4D\x0C"
+				"windows" 	"?AddCond@CTFPlayerShared@@QAEXHM@Z"
 				"linux"		"@_ZN15CTFPlayerShared7AddCondEif"
-				"mac"		"@_ZN15CTFPlayerShared7AddCondEif"
 			}
 			"RemoveCondition"
 			{
 				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x53\x56\x8B\x75\x08\x8B\xD9\x89\x75\x08\x57\x81\xFE\x80\x00\x00\x00\x7D\x2A\x83\xFE\x60\x7D\x2A\x83\xFE\x40\x7D\x2A\x83\xFE\x20\x7D\x2A\x8D\x7B\x18\x8B\x47\xE8\x8D\x4F\xE8\x57\xFF\x10\xEB\x2A\x8D\x7B\x1C\x8B\x47\xE4\x8D\x4F\xE4\x57\xFF\x10\x8D\x46\xE0\xEB\x2A\x8D\x7B\x20\x8B\x47\xE0\x8D\x4F\xE0\x57\xFF\x10\x8D\x46\xC0\xEB\x2A\x8D\x7B\x24\x8B\x47\xDC\x8D\x4F\xDC\x57\xFF\x10\x8D\x46\xA0\xEB\x2A\x8D\x7B\x28\x8B\x47\xD8\x8D\x4F\xD8\x57\xFF\x10\x8D\x46\x80\x89\x45\x08\x8B\x4D\x08\xB8\x01\x00\x00\x00\xD3\xE0\x8D\x4D\x08"
+				"windows"	"@?RemoveCond@CTFPlayerShared@@QAEXH@Z"
 				"linux"		"@_ZN15CTFPlayerShared10RemoveCondEi"
-				"mac"		"@_ZN15CTFPlayerShared10RemoveCondEi"
 			}
 			"SetInWaitingForPlayers"
 			{
 				"library"	"server"
-				"windows"	"\x55\x8B\xEC\x83\xEC\x10\x53\x8B\x1D\x2A\x2A\x2A\x2A"
+				"windows"	"?SetInWaitingForPlayers@CTeamplayRoundBasedRules@@IAEX_N@Z"
 				"linux"		"@_ZN24CTeamplayRoundBasedRules22SetInWaitingForPlayersEb"
-				"mac"		"@_ZN24CTeamplayRoundBasedRules22SetInWaitingForPlayersEb"
 			}
 			"CanAttack"
 			{
 				"library"	"server"
 				"linux" 	"@_ZN9CTFPlayer9CanAttackEv"
-				"mac" 		"@_ZN9CTFPlayer9CanAttackEv"
 			}
 			"PrimaryAttack"
 			{
 				"library" 	"server"
 				"windows"	"\x55\x8B\xEC\x83\xEC\x08\x56\x6A\x00"
 				"linux" 	"@_ZN13CTFWeaponBase13PrimaryAttackEv"
-				"mac" 		"@_ZN13CTFWeaponBase13PrimaryAttackEv"
 			}
 			"CalcIsAttackCritical"
 			{
 				"library" 	"server"
 				"windows"	"\x55\x8B\xEC\x83\xEC\x08\x53\x57\x8B\xF9\xE8\x2A\x2A\x2A\x2A"
 				"linux" 	"@_ZN13CTFWeaponBase20CalcIsAttackCriticalEv"
-				"mac" 		"@_ZN13CTFWeaponBase20CalcIsAttackCriticalEv"
 			}
 			"MyTouch"
 			{
 				"library" 	"server"
 				"linux" 	"@_ZN5CItem7MyTouchEP11CBasePlayer"
-				"mac" 		"@_ZN5CItem7MyTouchEP11CBasePlayer"
 			}
 			"HandleCommand_JoinClass"
 			{
 				"library" 	"server"
 				"windows"	"\x55\x8B\xEC\x83\xEC\x08\x80\x7D\x0C\x00"
 				"linux" 	"@_ZN9CTFPlayer23HandleCommand_JoinClassEPKcb"
-				"mac" 		"@_ZN9CTFPlayer23HandleCommand_JoinClassEPKcb"
 			}
 			"InitClass"
 			{
 				"library" 	"server"
 				"windows"	"\x55\x8B\xEC\x51\x53\x56\x8B\xC1\x57"
 				"linux" 	"@_ZN9CTFPlayer9InitClassEv"
-				"mac" 		"@_ZN9CTFPlayer9InitClassEv"
 			}
 			"HandleCommand_JoinTeam"
 			{
 				"library" 	"server"
 				"windows"	"\x55\x8B\xEC\x83\xEC\x08\x57\x8B\xF9\x8B\x0D\x2A\x2A\x2A\x2A"
 				"linux" 	"@_ZN9CTFPlayer22HandleCommand_JoinTeamEPKcb"
-				"mac" 		"@_ZN9CTFPlayer22HandleCommand_JoinTeamEPKcb"
 			}
 			"UpdatePlayerClass"
 			{
 				"library" 	"server"
 				"windows"	"\x55\x8B\xEC\x8B\x45\x0C\x53\x57\x8B\xF9"
 				"linux" 	"@_ZN9CTFPlayer17UpdatePlayerClassEib"
-				"mac" 		"@_ZN9CTFPlayer17UpdatePlayerClassEib"
 			}
 			"UpdateCosmetics"
 			{
 				"library" 	"server"
 				"linux" 	"@_ZN9CTFPlayer15UpdateCosmeticsEv"
-				"mac" 		"@_ZN9CTFPlayer15UpdateCosmeticsEv"
 			}
 		}
 	}

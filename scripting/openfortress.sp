@@ -38,48 +38,6 @@ Handle
 	hCalcIsAttackCriticalNoCrits,
 	hSpawn;
 
-enum struct stun_struct_t
-{
-	int hPlayer;
-	float flDuration;
-	float flExpireTime;
-	float flStartFadeTime;
-	float flStunAmount;
-	int iStunFlags;
-	bool bActive;		// Hack
-
-	void Reset()
-	{
-		this.hPlayer = 0;
-		this.flDuration = 0.0;
-		this.flExpireTime = 0.0;
-		this.flStartFadeTime = 0.0;
-		this.flStunAmount = 0.0;
-		this.iStunFlags = 0;
-		this.bActive = false;
-	}
-
-	void KillAllParticles(int client)
-	{
-		int ent = -1;
-		char name[32];
-		while ((ent = FindEntityByClassname(ent, "info_particle_system")) != -1)
-		{
-			if (GetEntPropEnt(ent, Prop_Send, "m_hOwnerEntity") == client)
-			{
-				GetEntPropString(ent, Prop_Data, "m_iszEffectName", name, sizeof(name));
-				if (!strcmp(name, "yikes_fx") || !strcmp(name, "conc_stars"))
-				{
-					RemoveEntity(ent);
-				}
-			}
-		}
-	}
-}
-
-stun_struct_t
-	g_Stuns[MAXPLAYERS+1]
-;
 
 // I hate windows, so, so much
 ArrayStack
@@ -263,63 +221,10 @@ public void OnPluginStart()
 
 public void OnClientPutInServer(int client)
 {
-	g_Stuns[client].Reset();
-	SDKHook(client, SDKHook_PreThink, OnPreThink);
 	DHookEntity(hSpawn, true, client);
 //	DHookEntity(hForceRespawn, false, client);
 }
 
-public void OnPreThink(int client)
-{
-	if (TF2_IsPlayerInCondition(client, TFCond_Dazed))
-	{
-		if (g_Stuns[client].bActive && GetGameTime() < g_Stuns[client].flExpireTime)
-		{
-			g_Stuns[client].Reset();
-			g_Stuns[client].KillAllParticles(client);
-			TF2_RemoveCondition(client, TFCond_Dazed);
-		}
-	}
-}
-
-public void OnPlayerDeath(Event event, const char[] name, bool dontBroadcast)
-{
-	int client = GetClientOfUserId(event.GetInt("userid"));
-	if (g_Stuns[client].bActive)
-	{
-		g_Stuns[client].Reset();
-		g_Stuns[client].KillAllParticles(client);
-	}
-}
-
-public void TF2_OnConditionAdded(int client, TFCond cond, float dur)
-{
-	// This should be implemented in OF code.
-	// Do not do this.
-	// Fuck it, honestly. Better than no stuns at all
-	if (cond == TFCond_Dazed && g_Stuns[client].bActive)
-	{
-		if (!(g_Stuns[client].iStunFlags & TF_STUNFLAG_NOSOUNDOREFFECT))
-		{
-			if (g_Stuns[client].iStunFlags & TF_STUNFLAG_GHOSTEFFECT)
-			{
-				AttachParticle(client, "yikes_fx", "head", dur);
-			}
-			else
-			{
-				AttachParticle(client, "conc_stars", "head", dur);
-			}
-		}
-	}
-}
-
-public void TF2_OnConditionRemoved(int client, TFCond cond)
-{
-	if (cond == TFCond_Dazed)
-	{
-		g_Stuns[client].KillAllParticles(client);
-	}
-}
 
 public void OnEntityCreated(int ent, const char[] name)
 {
@@ -328,17 +233,6 @@ public void OnEntityCreated(int ent, const char[] name)
 		DHookEntity(hCalcIsAttackCritical, true, ent);
 		DHookEntity(hCalcIsAttackCriticalNoCrits, true, ent);
 	}
-}
-
-public Action OnPlayerRunCmd(int client, int &buttons)
-{
-	// Also terrible.
-	if (TF2_IsPlayerInCondition(client, TFCond_Dazed))
-	{
-		buttons &= ~(IN_JUMP|IN_ATTACK|IN_ATTACK2);
-		return Plugin_Changed;
-	}
-	return Plugin_Continue;
 }
 
 bool g_iCondAdd[MAXPLAYERS+1][view_as< int >(TFCond_LAST)*2];
@@ -640,83 +534,7 @@ public any Native_TF2_RemovePlayerDisguise(Handle plugin, int numParams)
 // No support, gotta do it the fun way
 public any Native_TF2_StunPlayer(Handle plugin, int numParams)
 {
-	int client = GetNativeCell(1);
-	DECLARE_BS(client);
-
-	float time = GetNativeCell(2);
-	if (time < 0.0)
-		time = 0.0;
-
-	float reduction = GetNativeCell(3);
-
-	int flags = GetNativeCell(4);
-	int attacker = GetNativeCell(5);
-	if (attacker)
-	{
-		if (!(0 < attacker <= MaxClients))
-			return ThrowNativeError(SP_ERROR_NATIVE, "Attacker index %d is invalid.", attacker);
-		if (!IsClientInGame(attacker))
-			return ThrowNativeError(SP_ERROR_NATIVE, "Attacker %d is not in-game", attacker);
-
-//		if (GetClientTeam(attacker) == GetClientTeam(victim))
-//			return;
-	}
-
-	float remapamount = RemapValClamped(reduction, 0.0, 1.0, 0.0, 255.0);
-//	int oldstunflags = g_Stuns[client].iStunFlags;
-	bool stomp;
-
-	if (TF2_IsPlayerInCondition(client, TFCond_Dazed))
-	{
-		if (remapamount > g_Stuns[client].flStunAmount || flags & (TF_STUNFLAG_LIMITMOVEMENT|TF_STUNFLAG_THIRDPERSON))
-			stomp = true;
-		else if (GetGameTime() + time < g_Stuns[client].flExpireTime)
-			return 0;
-	}
-
-	stun_struct_t stunEvent;
-	stunEvent.hPlayer = 0 < attacker <= MaxClients ? GetClientUserId(attacker) : 0;		// Store by userid, better this way
-	stunEvent.flDuration = time;
-	stunEvent.flExpireTime = GetGameTime() + time;
-	stunEvent.flStartFadeTime = GetGameTime() + time;
-	stunEvent.flStunAmount = remapamount;
-	stunEvent.iStunFlags = flags;
-
-	if (stomp || !g_Stuns[client].bActive)
-	{
-		float oldstun = g_Stuns[client].bActive ? g_Stuns[client].flStunAmount : 0.0;
-
-		g_Stuns[client] = stunEvent;
-		if (oldstun > remapamount)
-			g_Stuns[client].flStunAmount = oldstun;
-	}
-	else
-	{
-		// TODO; make an actual stun vector
-	}
-
-	if (g_Stuns[client].iStunFlags & TF_STUNFLAG_BONKSTUCK)
-		g_Stuns[client].flExpireTime += 1.5;
-
-	g_Stuns[client].flStartFadeTime = GetGameTime() + g_Stuns[client].flDuration;
-
-	if (g_Stuns[client].iStunFlags & (TF_STUNFLAG_BONKSTUCK|TF_STUNFLAG_THIRDPERSON))
-	{
-		// Third person and concept sounds
-	}
-
-	if (!(g_Stuns[client].iStunFlags & TF_STUNFLAG_NOSOUNDOREFFECT))
-	{
-		// Stun sound
-	}
-
-	if (g_Stuns[client].iStunFlags & (TF_STUNFLAG_BONKSTUCK|TF_STUNFLAG_THIRDPERSON))
-	{
-		TF2_RemoveCondition(client, TFCond_Taunting);
-	}
-
-	// This condition literally isn' touched in the source, so I have to do fucking EVERYTHING
-	TF2_AddCondition(client, TFCond_Dazed, g_Stuns[client].flDuration);
+	LogError("Not currently supported, implement it yourself!");
 	return 0;
 }
 
