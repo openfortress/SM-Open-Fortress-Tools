@@ -6,7 +6,7 @@
 #pragma semicolon 1
 #include <openfortress>
 
-#define PLUGIN_VERSION 		"1.1.0"
+#define PLUGIN_VERSION 		"1.1.1"
 
 public Plugin myinfo =  {
 	name = "Open Fortress Tools",
@@ -69,7 +69,9 @@ enum struct stun_struct_t
 			{
 				GetEntPropString(ent, Prop_Data, "m_iszEffectName", name, sizeof(name));
 				if (!strcmp(name, "yikes_fx") || !strcmp(name, "conc_stars"))
+				{
 					RemoveEntity(ent);
+				}
 			}
 		}
 	}
@@ -97,8 +99,9 @@ public void OnPluginStart()
 {
 	GameData conf = LoadGameConfigFile("open-fortress");
 	if (!conf)	// Dies anyway but w/e
+	{
 		SetFailState("Gamedata \"open_fortress/addons/sourcemod/gamedata/open-fortress.txt\" does not exist.");
-
+	}
 	// Burn
 	StartPrepSDKCall(SDKCall_Player);
 	PrepSDKCall_SetFromConf(conf, SDKConf_Signature, "Burn");
@@ -161,7 +164,10 @@ public void OnPluginStart()
 		DHookEnableDetour(hook, false, CTFPlayer_Regenerate);
 		DHookEnableDetour(hook, true, CTFPlayer_Regenerate_Post);
 	}
-	else LogError("Could not load detour for Regenerate, OF_OnPlayerRegenerated forward has been disabled");
+	else
+	{
+		LogError("Could not load detour for Regenerate, OF_OnPlayerRegenerated forward has been disabled");
+	}
 
 	hook = DHookCreateDetourEx(conf, "AddCondition", CallConv_THISCALL, ReturnType_Void, ThisPointer_Address);
 	if (hook)
@@ -185,7 +191,10 @@ public void OnPluginStart()
 		DHookEnableDetour(hook, false, CTFPlayerShared_RemoveCond);
 		DHookEnableDetour(hook, true, CTFPlayerShared_RemoveCondPost);
 	}
-	else LogError("Could not load detour for RemoveCondition, TF2_OnConditionRemoved forward has been disabled");
+	else
+	{
+		LogError("Could not load detour for RemoveCondition, TF2_OnConditionRemoved forward has been disabled");
+	}
 
 	//	hook = DHookCreateDetourEx(conf, "HandleCommand_JoinClass", CallConv_THISCALL, ReturnType_Void, ThisPointer_CBaseEntity);
 	//	if (hook)
@@ -210,22 +219,31 @@ public void OnPluginStart()
 
 	hCalcIsAttackCritical = DHookCreateEx(conf, "CalcIsAttackCriticalHelper", HookType_Entity, ReturnType_Bool, ThisPointer_CBaseEntity, CTFWeaponBase_CalcIsAttackCritical);
 	if (!hCalcIsAttackCritical)
+	{
 		LogError("Could not load hook for CalcIsAttackCritical, TF2_CalcIsAttackCritical forward has been disabled");
+	}
 
 	hCalcIsAttackCriticalNoCrits = DHookCreateEx(conf, "CalcIsAttackCriticalHelperNoCrits", HookType_Entity, ReturnType_Bool, ThisPointer_CBaseEntity, CTFWeaponBase_CalcIsAttackCriticalNoCrits);
 	if (!hCalcIsAttackCritical)
+	{
 		LogError("Could not load hook for CalcIsAttackCriticalNoCrits, TF2_CalcIsAttackCritical forward has been disabled");
+	}
 
 	hSpawn = DHookCreateEx(conf, "Spawn", HookType_Entity, ReturnType_Void, ThisPointer_CBaseEntity, CTFPlayer_Spawn);
 	if (!hSpawn)
+	{
 		LogError("Could not load hook for Spawn, OF_OnPlayerSpawned forward has been disabled");
+	}
 
 	delete conf;
 
-	for (int i = MaxClients; i; --i)
+	for (int i = 1; i <= MaxClients; i++)
+	{
 		if (IsClientInGame(i))
+		{
 			OnClientPutInServer(i);
-
+		}
+	}
 	HookEvent("player_death", OnPlayerDeath);
 
 	// SO
@@ -276,18 +294,31 @@ public void OnPlayerDeath(Event event, const char[] name, bool dontBroadcast)
 
 public void TF2_OnConditionAdded(int client, TFCond cond, float dur)
 {
+	// This should be implemented in OF code.
+	// Do not do this.
 	// Fuck it, honestly. Better than no stuns at all
 	if (cond == TFCond_Dazed && g_Stuns[client].bActive)
+	{
 		if (!(g_Stuns[client].iStunFlags & TF_STUNFLAG_NOSOUNDOREFFECT))
+		{
 			if (g_Stuns[client].iStunFlags & TF_STUNFLAG_GHOSTEFFECT)
+			{
 				AttachParticle(client, "yikes_fx", "head", dur);
-			else AttachParticle(client, "conc_stars", "head", dur);
+			}
+			else
+			{
+				AttachParticle(client, "conc_stars", "head", dur);
+			}
+		}
+	}
 }
 
 public void TF2_OnConditionRemoved(int client, TFCond cond)
 {
 	if (cond == TFCond_Dazed)
+	{
 		g_Stuns[client].KillAllParticles(client);
+	}
 }
 
 public void OnEntityCreated(int ent, const char[] name)
@@ -301,6 +332,7 @@ public void OnEntityCreated(int ent, const char[] name)
 
 public Action OnPlayerRunCmd(int client, int &buttons)
 {
+	// Also terrible.
 	if (TF2_IsPlayerInCondition(client, TFCond_Dazed))
 	{
 		buttons &= ~(IN_JUMP|IN_ATTACK|IN_ATTACK2);
@@ -323,11 +355,18 @@ public MRESReturn CTFPlayerShared_AddCond(Address pThis, Handle hParams)
 	g_Bullshit1.PushArray(shit, sizeof(shit));
 
 	if (client == -1 || !IsClientInGame(client) || !IsPlayerAlive(client))	// Sanity check
-		return;
+	{
+		return MRES_Ignored;
+	}
 
 	if (!TF2_IsPlayerInCondition(client, shit.cond))
+	{
 		g_iCondAdd[client][shit.cond] = true;
+	}
+
+	return MRES_Ignored;
 }
+
 public MRESReturn CTFPlayerShared_AddCondPost(Address pThis, Handle hParams)
 {
 	Address m_pOuter = view_as< Address >(FindSendPropInfo("CTFPlayer", "m_bIsZombie") - FindSendPropInfo("CTFPlayer", "m_Shared") + 3);
@@ -337,7 +376,9 @@ public MRESReturn CTFPlayerShared_AddCondPost(Address pThis, Handle hParams)
 	g_Bullshit1.PopArray(shit, sizeof(shit));
 
 	if (client == -1 ||!IsClientInGame(client))	// Sanity check
-		return;
+	{
+		return MRES_Ignored;
+	}
 
 	if (IsPlayerAlive(client))
 	{
@@ -353,6 +394,8 @@ public MRESReturn CTFPlayerShared_AddCondPost(Address pThis, Handle hParams)
 		}
 	}
 	g_iCondAdd[client][shit.cond] = false;
+
+	return MRES_Ignored;
 }
 
 public MRESReturn CTFPlayerShared_RemoveCond(Address pThis, Handle hParams)
@@ -365,10 +408,16 @@ public MRESReturn CTFPlayerShared_RemoveCond(Address pThis, Handle hParams)
 	g_Bullshit2.PushArray(shit, sizeof(shit));
 
 	if (client == -1 || !IsPlayerAlive(client))	// Sanity check
-		return;
+	{
+		return MRES_Ignored;
+	}
 
 	if (TF2_IsPlayerInCondition(client, shit.cond))
+	{
 		g_iCondRemove[client][shit.cond] = true;
+	}
+
+	return MRES_Ignored;
 }
 
 public MRESReturn CTFPlayerShared_RemoveCondPost(Address pThis, Handle hParams)
@@ -380,7 +429,9 @@ public MRESReturn CTFPlayerShared_RemoveCondPost(Address pThis, Handle hParams)
 	g_Bullshit2.PopArray(shit, sizeof(shit));
 
 	if (client == -1)	// Sanity check
-		return;
+	{
+		return MRES_Ignored;
+	}
 
 	if (IsPlayerAlive(client))
 	{
@@ -394,10 +445,13 @@ public MRESReturn CTFPlayerShared_RemoveCondPost(Address pThis, Handle hParams)
 		}
 	}
 	g_iCondRemove[client][shit.cond] = false;
+
+	return MRES_Ignored;
 }
 
 public MRESReturn CTFPlayer_Regenerate(int pThis)
 {
+	return MRES_Ignored;
 }
 public MRESReturn CTFPlayer_Regenerate_Post(int pThis)
 {
@@ -405,6 +459,8 @@ public MRESReturn CTFPlayer_Regenerate_Post(int pThis)
 	Call_StartForward(hOnRegeneration);
 	Call_PushCell(pThis);
 	Call_Finish();
+
+	return MRES_Ignored;
 }
 
 public MRESReturn CTFWeaponBase_CalcIsAttackCritical(int pThis, Handle hReturn)
@@ -450,6 +506,8 @@ public MRESReturn CTFPlayer_Spawn(int pThis)
 		Call_PushCell(pThis);
 		Call_Finish();
 	}
+
+	return MRES_Ignored;
 }
 
 public APLRes AskPluginLoad2(Handle self, bool late, char[] error, int max)
@@ -669,7 +727,9 @@ public any Native_OF_InitClass(Handle plugin, int numParams)
 	DECLARE_BS(client);
 
 	if (IsPlayerAlive(client))
+	{
 		SDKCall(hInitClass, client);
+	}
 	return 0;
 }
 
@@ -692,11 +752,14 @@ stock Handle DHookCreateDetourEx(GameData conf, const char[] name, CallingConven
 stock int GetEntityFromAddress(Address pEntity)
 {
 	if (pEntity == Address_Null)
+	{
 		return -1;
-
+	}
 	int ent = LoadFromAddress(pEntity + view_as< Address >(FindDataMapInfo(0, "m_angRotation") + 12), NumberType_Int32) & 0xFFF;
 	if (!ent || ent == 0xFFF)
+	{
 		return -1;
+	}
 	return ent;
 }
 stock Handle DHookCreateEx(Handle gc, const char[] key, HookType hooktype, ReturnType returntype, ThisPointerType thistype, DHookCallback callback)
@@ -714,7 +777,9 @@ stock Handle DHookCreateEx(Handle gc, const char[] key, HookType hooktype, Retur
 stock float RemapValClamped(float val, float A, float B, float C, float D)
 {
 	if (A == B)
+	{
 		return val >= B ? D : C;
+	}
 	float cVal = (val - A) / (B - A);
 	cVal = clamp(cVal, 0.0, 1.0);
 
@@ -724,9 +789,13 @@ stock float RemapValClamped(float val, float A, float B, float C, float D)
 stock float clamp(float val, float a, float b)
 {
 	if (val < a)
+	{
 		val = a;
+	}
 	if (val > b)
+	{
 		val = b;
+	}
 	return val;
 }
 
