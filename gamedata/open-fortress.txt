@@ -85,7 +85,7 @@
 			"AddCondition"
 			{
 				"library"	"server"
-				"windows" 	"?AddCond@CTFPlayerShared@@QAEXHM@Z"
+				"windows" 	"@?AddCond@CTFPlayerShared@@QAEXHM@Z"
 				"linux"		"@_ZN15CTFPlayerShared7AddCondEif"
 			}
 			"RemoveCondition"
