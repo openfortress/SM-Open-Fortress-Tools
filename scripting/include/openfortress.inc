@@ -200,8 +200,17 @@ enum TFCond
 	TFCond_InvisPowerup, // 132
 	TFCond_Haste, // 133
 	TFCond_Juggernaught, // 134
-	TFCond_Poison,
-	TFCond_Tranq,
+	TFCond_ShieldDuel, // 135
+	TFCond_Poison, // 136
+	TFCond_Tranq, // 137
+	TFCond_PiercedLegs, // 138
+	TFCond_Hooked, // 139
+	TFCond_BlastJump, // 140
+	TFCond_AimingTFC, // 141
+	TFCond_AimingScopeOnly, // 142
+	TFCond_JetpackPowerup, // 143
+	TFCond_JetpackEngaged, // 144
+	TFCond_JetpackCooldown, // 145
 
 	TFCond_LAST
 };
